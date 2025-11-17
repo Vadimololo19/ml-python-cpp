@@ -1,4 +1,3 @@
-# python/app.py
 from flask import Flask, request, jsonify
 import joblib
 import numpy as np
@@ -6,13 +5,12 @@ import os
 
 app = Flask(__name__)
 
-# Загружаем модель один раз при старте
 model_path = "model.pkl"
 if not os.path.exists(model_path):
     raise FileNotFoundError(f"Модель {model_path} не найдена. Запустите train.py сначала.")
 
 model = joblib.load(model_path)
-print("✅ Модель загружена")
+print("Модель загружена")
 
 @app.route('/health', methods=['GET'])
 def health():
