@@ -13,7 +13,7 @@ print("Загружаем California Housing...")
 data = fetch_california_housing(as_frame=True)
 df = data.frame
 
-print("📊 Shape:", df.shape)
+print("Shape:", df.shape)
 print(df.head(3))
 
 X = df.drop(columns=['MedHouseVal'])
