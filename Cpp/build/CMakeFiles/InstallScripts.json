@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/kaguya/Documents/ml-rust-python/ml-python-rust/Cpp/build/cmake_install.cmake",
+		"/home/kaguya/Documents/ml-rust-python/ml-python-rust/Cpp/build/_deps/json-build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

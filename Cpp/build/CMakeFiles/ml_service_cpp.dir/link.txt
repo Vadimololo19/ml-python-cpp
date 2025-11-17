@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/ml_service_cpp.dir/link.d CMakeFiles/ml_service_cpp.dir/main.cpp.o -o ml_service_cpp  /usr/lib/libdrogon.so.1.9.11 /usr/lib/libonnxruntime.so.1.22.2 /usr/lib/libtrantor.so.1.5.23 /usr/lib/libjsoncpp.so

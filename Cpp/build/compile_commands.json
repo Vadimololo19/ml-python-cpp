@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/kaguya/Documents/ml-rust-python/ml-python-rust/Cpp/build",
+  "command": "/usr/bin/c++  -I/home/kaguya/Documents/ml-rust-python/ml-python-rust/Cpp/build/_deps/json-src/include -isystem /usr/include/onnxruntime -O3 -DNDEBUG -std=gnu++17 -O3 -march=native -fno-omit-frame-pointer -o CMakeFiles/ml_service_cpp.dir/main.cpp.o -c /home/kaguya/Documents/ml-rust-python/ml-python-rust/Cpp/main.cpp",
+  "file": "/home/kaguya/Documents/ml-rust-python/ml-python-rust/Cpp/main.cpp",
+  "output": "CMakeFiles/ml_service_cpp.dir/main.cpp.o"
+}
+]
