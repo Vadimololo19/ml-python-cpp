@@ -1,3 +1,0 @@
-concurrency,rps,avg_latency_ms,p95_latency_ms,p99_latency_ms,error_rate,cpu_percent,ram_mb
-1,7043.5135,0.10,0.00,0.00,0.00,9.27,3988
-5,12291.3623,0.40,0.00,0.00,0.00,26.90,3989

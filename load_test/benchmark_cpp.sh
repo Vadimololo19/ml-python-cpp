@@ -89,13 +89,16 @@ for c in "${CONCURRENCY[@]}"; do
 
     echo "Анализ результатов..."
 
-    RPS=$(echo "$OUTPUT" | grep "Requests/sec" | awk '{print $2}' | head -1)
-    AVG_LATENCY=$(echo "$OUTPUT" | grep "Average:" | awk '{printf "%.2f", $2*1000}' | head -1)
-    P95_LATENCY=$(echo "$OUTPUT" | grep "95%" | awk '{printf "%.2f", $2*1000}' | head -1)
-    P99_LATENCY=$(echo "$OUTPUT" | grep "99%" | awk '{printf "%.2f", $2*1000}' | head -1)
+    RPS=$(echo "$OUTPUT" | grep "Requests/sec" | awk '{gsub(/,/, "", $2); print $2}' | head -1)
+    TOTAL_REQUESTS=$(echo "$OUTPUT" | grep "Total:" | awk '{gsub(/,/, "", $2); print $2}' | head -1)
+    SUCCESSFUL_REQUESTS=$(echo "$OUTPUT" | grep "Success:" | awk '{gsub(/,/, "", $2); print $2}' | head -1)
 
-    TOTAL_REQUESTS=$(echo "$OUTPUT" | grep "Total:" | awk '{print $2}' | tr -d ',' | head -1)
-    SUCCESSFUL_REQUESTS=$(echo "$OUTPUT" | grep "Success:" | awk '{print $2}' | tr -d ',' | head -1)
+    AVG_LATENCY=$(echo "$OUTPUT" | grep "Average:" | awk '{gsub(/ms/, "", $2); printf "%.2f", $2+0}' | head -1)
+    P50_LATENCY=$(echo "$OUTPUT" | grep "50% in"  | awk '{gsub(/ms/, "", $3); printf "%.2f", $3+0}' | head -1)
+    P75_LATENCY=$(echo "$OUTPUT" | grep "75% in"  | awk '{gsub(/ms/, "", $3); printf "%.2f", $3+0}' | head -1)
+    P90_LATENCY=$(echo "$OUTPUT" | grep "90% in"  | awk '{gsub(/ms/, "", $3); printf "%.2f", $3+0}' | head -1)
+    P95_LATENCY=$(echo "$OUTPUT" | grep "95% in"  | awk '{gsub(/ms/, "", $3); printf "%.2f", $3+0}' | head -1)
+    P99_LATENCY=$(echo "$OUTPUT" | grep "99% in"  | awk '{gsub(/ms/, "", $3); printf "%.2f", $3+0}' | head -1)
 
     if [ -z "$TOTAL_REQUESTS" ] || [ -z "$SUCCESSFUL_REQUESTS" ] || [ "$TOTAL_REQUESTS" -eq 0 ]; then
         ERROR_RATE=0.00
