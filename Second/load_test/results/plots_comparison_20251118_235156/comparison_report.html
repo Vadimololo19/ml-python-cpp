@@ -1,0 +1,157 @@
+
+    <!DOCTYPE html>
+    <html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Сравнительный отчет: Python vs C++ ML сервисы</title>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #f8f9fa;
+            }
+            h1 {
+                color: #2c3e50;
+                text-align: center;
+                border-bottom: 3px solid #3498db;
+                padding-bottom: 10px;
+                margin-bottom: 30px;
+            }
+            h2 {
+                color: #3498db;
+                border-left: 4px solid #3498db;
+                padding-left: 10px;
+                margin-top: 30px;
+                margin-bottom: 20px;
+            }
+            .chart-container {
+                text-align: center;
+                margin: 30px 0;
+                background: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+            .chart-container img {
+                max-width: 100%;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                border-radius: 4px;
+            }
+            .summary-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+                background: white;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+            .summary-table th, .summary-table td {
+                border: 1px solid #ddd;
+                padding: 12px;
+                text-align: left;
+            }
+            .summary-table th {
+                background-color: #3498db;
+                color: white;
+                font-weight: bold;
+            }
+            .summary-table tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+            .summary-table tr:hover {
+                background-color: #e3f2fd;
+            }
+            .highlight {
+                background-color: #fffacd;
+                padding: 2px 5px;
+                border-radius: 3px;
+                font-weight: bold;
+            }
+            .speedup {
+                font-size: 28px;
+                font-weight: bold;
+                color: #27ae60;
+                text-align: center;
+                padding: 25px;
+                background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+                border-radius: 15px;
+                margin: 30px 0;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+                border: 2px solid #2ecc71;
+            }
+            .conclusion {
+                background-color: #e3f2fd;
+                padding: 25px;
+                border-radius: 8px;
+                margin: 30px 0;
+                border-left: 4px solid #2196f3;
+            }
+            .footer {
+                text-align: center;
+                margin-top: 40px;
+                color: #7f8c8d;
+                font-style: italic;
+                padding: 20px;
+                border-top: 1px solid #eee;
+            }
+            .metric-card {
+                background: white;
+                border-radius: 8px;
+                padding: 20px;
+                margin: 10px 0;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                border-left: 4px solid #3498db;
+            }
+            .metric-value {
+                font-size: 24px;
+                font-weight: bold;
+                color: #2c3e50;
+            }
+            .metric-label {
+                color: #7f8c8d;
+                font-size: 14px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Сравнительный отчет: Python vs C++ ML сервисы</h1>
+        <p style="text-align: center; color: #7f8c8d; font-size: 14px;">
+            Дата генерации: 2025-11-18 23:52:02 | Датасет: NF-UNSW-NB15 (обнаружение сетевых атак)
+        </p>
+        
+        <div class="speedup">
+            C++ сервис быстрее Python в <span class="highlight">455.7 раз</span>
+        </div>
+        
+        <h2>Сводные результаты</h2>
+        <table class="summary-table">
+            <thead>
+                <tr>
+    <th>Service</th><th>Max RPS</th><th>Best Concurrency</th><th>Avg Latency (ms)</th><th>p99 Latency (ms)</th><th>CPU Usage (%)</th><th>Memory (MB)</th><th>Error Rate (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+    <tr><td style="color: #e74c3c; font-weight: bold;">Python</td><td>36.9</td><td>25</td><td>0.68</td><td>1.07</td><td>97.8</td><td>169</td><td>0.00</td></tr><tr><td style="color: #2ecc71; font-weight: bold;">C++</td><td>16833.5</td><td>25</td><td>0.00</td><td>0.01</td><td>143.6</td><td>42</td><td>0.00</td></tr>
+            </tbody>
+        </table>
+        
+        <h2>Сравнение производительности</h2>
+        <div class="chart-container">
+            <img src="comparison_all_metrics.png" alt="Сравнение всех метрик">
+            <p style="color: #7f8c8d; margin-top: 5px;">Сравнение RPS, задержек, использования CPU и эффективности при разных уровнях нагрузки</p>
+        </div>
+        
+        <h2>Коэффициент ускорения</h2>
+        <div class="chart-container">
+            <img src="speedup_comparison.png" alt="Коэффициент ускорения">
+            <p style="color: #7f8c8d; margin-top: 5px;">Во сколько раз C++ сервис обрабатывает больше запросов при том же уровне нагрузки</p>
+        </div>
+    </body>
+    </html>
+    

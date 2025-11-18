@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -flto -Wl,-z,relro,-z,now -Wl,--dependency-file=CMakeFiles/ml_nids_cpp.dir/link.d CMakeFiles/ml_nids_cpp.dir/ml_nids.cpp.o -o ml_nids_cpp  -Wl,-rpath,/usr/local/lib /usr/lib/libdrogon.so.1.9.11 /usr/lib/libonnxruntime.so.1.22.2 -lstdc++fs /usr/lib/libtrantor.so.1.5.23 /usr/lib/libjsoncpp.so /usr/lib/libfmt.so.12.1.0
