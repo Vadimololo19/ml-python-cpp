@@ -278,6 +278,67 @@ with open("../models/metadata.json", "w") as f:
 print("Метаданные сохранены")
 
 print("\n" + "="*60)
+print("ЭКСПОРТ ПАРАМЕТРОВ ПРЕДОБРАБОТКИ В JSON")
+print("="*60)
+
+preprocessing_params = {
+    "numerical_features": numerical_cols,
+    "categorical_features": categorical_cols,
+    "numerical_medians": {},
+    "numerical_means": {},
+    "numerical_scales": {},
+    "categorical_categories": {}
+}
+
+for i, col in enumerate(numerical_cols):
+    if hasattr(num_imputer, 'statistics_') and i < len(num_imputer.statistics_):
+        preprocessing_params["numerical_medians"][col] = float(num_imputer.statistics_[i])
+    
+    if 'scaler' in preprocessors and hasattr(preprocessors['scaler'], 'mean_') and i < len(preprocessors['scaler'].mean_):
+        preprocessing_params["numerical_means"][col] = float(preprocessors['scaler'].mean_[i])
+    
+    if 'scaler' in preprocessors and hasattr(preprocessors['scaler'], 'scale_') and i < len(preprocessors['scaler'].scale_):
+        preprocessing_params["numerical_scales"][col] = float(preprocessors['scaler'].scale_[i])
+
+if categorical_cols and 'cat_encoder' in preprocessors and hasattr(preprocessors['cat_encoder'], 'categories_'):
+    for i, col in enumerate(categorical_cols):
+        if i < len(preprocessors['cat_encoder'].categories_):
+            categories = preprocessors['cat_encoder'].categories_[i].tolist()
+            preprocessing_params["categorical_categories"][col] = [str(cat) for cat in categories]
+
+preprocessing_json_path = "../models/preprocessing_params.json"
+with open(preprocessing_json_path, "w") as f:
+    json.dump(preprocessing_params, f, indent=2, ensure_ascii=False)
+
+print(f"Параметры предобработки успешно сохранены в {preprocessing_json_path}")
+print(f"- Числовых признаков: {len(numerical_cols)}")
+print(f"- Категориальных признаков: {len(categorical_cols)}")
+print(f"- Медианных значений: {len(preprocessing_params['numerical_medians'])}")
+
+if 'scaler' in preprocessors:
+    print(f"- Средних значений: {len(preprocessing_params['numerical_means'])}")
+    print(f"- Масштабных коэффициентов: {len(preprocessing_params['numerical_scales'])}")
+else:
+    print("- StandardScaler не использовался в предобработке")
+
+if categorical_cols:
+    print(f"- Категорий для one-hot encoding: {len(preprocessing_params['categorical_categories'])}")
+
+
+print("\nПример параметров для первых 3 числовых признаков:")
+for i, col in enumerate(numerical_cols[:3], 1):
+    print(f"{i}. {col}:")
+    print(f"   Медиана: {preprocessing_params['numerical_medians'].get(col, 'N/A')}")
+    print(f"   Среднее: {preprocessing_params['numerical_means'].get(col, 'N/A')}")
+    print(f"   Масштаб: {preprocessing_params['numerical_scales'].get(col, 'N/A')}")
+
+if categorical_cols:
+    print(f"\nПример категорий для первого категориального признака '{categorical_cols[0]}':")
+    categories = preprocessing_params['categorical_categories'].get(categorical_cols[0], [])
+    print(f"   Всего категорий: {len(categories)}")
+    print(f"   Первые 3 категории: {categories[:3]}")
+
+print("\n" + "="*60)
 print("ГОТОВО! МОДЕЛЬ УСПЕШНО ОБУЧЕНА И СОХРАНЕНА")
 print("="*60)
 print(f"Для запуска Python сервиса: python app_nids.py")
