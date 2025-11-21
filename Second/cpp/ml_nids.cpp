@@ -187,12 +187,22 @@ void predictHandler(const drogon::HttpRequestPtr& req,
         } else {
             throw std::runtime_error("Выходной тензор не является тензором");
         }
-        
+
+        static std::atomic<uint64_t> request_counter{0};
+        uint64_t current_request = ++request_counter;
+
         auto end_time = std::chrono::high_resolution_clock::now();
         auto inference_duration = end_time - start_time;
         double inference_time = std::chrono::duration_cast<std::chrono::microseconds>(
             inference_duration
         ).count() / 1000.0;  
+
+        if (current_request % 10 == 0) {
+          std::string result_str = attack_prob > 0.5f ? "АТАКА" : "НОРМА";
+          spdlog::info("[Запрос #{:05d}] {} (вероятность: {:.4f}, время: {:.2f}мс)", 
+                 current_request, result_str, attack_prob, inference_time);
+        }
+
 
         {
             std::lock_guard<std::mutex> lock(g_stats_mutex);

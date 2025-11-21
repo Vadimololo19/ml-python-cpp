@@ -125,7 +125,15 @@ def predict():
         global REQUEST_COUNT, TOTAL_INFERENCE_TIME
         REQUEST_COUNT += 1
         TOTAL_INFERENCE_TIME += inference_time
+
+        if pred_proba > 0.5:
+            result_type = "ATTACK"
+        else:
+            result_type = "NORMAL"
         
+        print(f"Запрос обработан. Время инференса: {inference_time:.2f} мс. Результат: {result_type}")
+        print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] Запрос #{REQUEST_COUNT}: {result_type} (вероятность: {pred_proba:.4f}, время: {inference_time:.2f}мс)")
+
         return jsonify({
             "prediction": float(pred_proba),
             "is_attack": bool(pred_proba > 0.5),
